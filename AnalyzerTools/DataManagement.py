@@ -115,7 +115,11 @@ def quadraticMomentum(dataframe, targetColumn, nPoints):
 
 def runQM(momentumDataFolder):
     """
-    Calculates the Quatratic momentum values for a list of price data files in chosen spesific folder and saves them in another
+    Calculates the Quatratic momentum values for a list of price data files in chosen spesific folder and saves them in another with same name
+    
+    Price data is taken from .../Data/Storage/Raw/AssetPrices/
+
+    Momentum data is saved to .../Data/Storage/Raw/Momentum/{momentumDataFolder}
     """
     if os.path.isdir("{}/Data/Storage/Raw/Momentum/{}".format(mainDirectory, momentumDataFolder)) == False:
         os.mkdir("{}/Data/Storage/Raw/Momentum/{}".format(mainDirectory, momentumDataFolder))

@@ -17,7 +17,9 @@ mainDirectory = mainDirectory[0:-9]
 
 def openDataset(dataset, validationDataStartingDate):
     """
-    Opens and prepares the dataset for training. Splits it into training and validation data based on the date
+    Opens and prepares the dataset for training. Splits it into training and validation data based on the validationDataStartingDate
+
+    dataset needs to be found from the folder .../Data/In/
     """
     dataset = pd.read_csv("{}/Data/In/{}".format(mainDirectory, dataset))
     validationStartIndex = dataset[dataset['Date'] == validationDataStartingDate].index[0]
@@ -50,7 +52,37 @@ def openDataset(dataset, validationDataStartingDate):
 
 
 def startTrainingModels(trainingSetLabel, dataset, activations, losses, epochsList, numberOfLSTMLayers, denseLayer, layerSizes, batchSizesList, validationDataStartingDate, earlyStop, patience):
+    """
+    Function for training the models. Here is an examle:
 
+    startTrainingModels(
+
+        trainingSetLabel            = "test",                   string
+
+        dataset                     = "test.csv",               ring
+
+        activations                 = ["relu", "sigmoid"],      list
+
+        losses                      = ["mean_squared_error"],   list
+
+        epochsList                  = [500],                    list
+
+        numberOfLSTMLayers          = [1,2],                    list
+
+        denseLayer                  = True,                     bool
+
+        layerSizes                  = [12, 16],                 list
+
+        batchSizesList              = [46, 50],                 list
+
+        validationDataStartingDate  = "2021-01-04",             string
+
+        earlyStop                   = True,                     bool
+
+        patience                    = 200,                      int
+
+        )
+    """
     newpath = r"{}/Data/Models/{}".format(mainDirectory, trainingSetLabel)
     if not os.path.exists(newpath):
         os.makedirs(newpath)
